@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - A.N PAPER</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- NHÚNG HEADER -->
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="container-fluid my-4 flex-grow-1 px-4">
+        <h1 class="text-success">BẢNG ĐIỀU KHIỂN QUẢN TRỊ ADMIN</h1>
+        
+        <!-- Ô TỔNG DOANH THU -->
+        <div class="card bg-success text-white my-3 p-3 style-card" style="max-width: 300px;">
+            <h3>TỔNG DOANH THU</h3>
+            <h2 th:text="${#numbers.formatDecimal(revenue, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></h2>
+        </div>
+
+        <h3>1. Quản Lý Đơn Hàng & Giao Hàng</h3>
+        <table class="table table-bordered align-middle">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Khách</th>
+                    <th>Số Tiền</th>
+                    <th>Trạng Thái</th>
+                    <th>Duyệt Giao Hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="o : ${orders}">
+                    <td th:text="${o.id}"></td>
+                    <td th:text="${o.customerName}"></td>
+                    <td th:text="${o.totalAmount} + ' VNĐ'"></td>
+                    <td th:text="${o.status}"></td>
+                    <td>
+                        <form th:if="${o.status == 'PENDING'}" th:action="@{/admin/orders/{id}/ship(id=${o.id})}" method="post">
+                            <button class="btn btn-primary btn-sm">Bấm "Đã Giao Hàng"</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 class="mt-5">2. Quản Lý Đánh Giá (Xóa Đánh Giá Vi Phạm)</h3>
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Khách Hàng</th>
+                    <th>Sản Phẩm</th>
+                    <th>Nội Dung</th>
+                    <th>Media</th>
+                    <th>Xóa Đánh Giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="r : ${reviews}">
+                    <td th:text="${r.user.fullName}"></td>
+                    <td th:text="${r.product.name}"></td>
+                    <td th:text="${r.comment}"></td>
+                    <td>
+                        <a th:if="${r.mediaUrl}" th:href="${r.mediaUrl}" target="_blank">Xem File Tải Up</a>
+                    </td>
+                    <td>
+                        <form th:action="@{/admin/reviews/{id}/delete(id=${r.id})}" method="post">
+                            <button class="btn btn-danger btn-sm">Xóa Đánh Giá</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <!-- NHÚNG FOOTER -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

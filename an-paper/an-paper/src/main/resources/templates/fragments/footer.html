@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <!-- Định nghĩa Fragment Footer -->
+    <footer th:fragment="footer" class="bg-dark text-white pt-4 pb-3 mt-5">
+        <div class="container text-center text-md-start">
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <h5 class="text-success fw-bold">A.N PAPER</h5>
+                    <p class="small text-light">Doanh nghiệp tiên phong sản xuất giấy và các sản phẩm thủ công cao cấp tái chế từ <strong>Bèo Lục Bình</strong>. Cam kết 100% phân hủy sinh học và bảo vệ môi trường.</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h6 class="text-uppercase fw-bold text-success">Liên kết nhanh</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="/" class="text-white-50 text-decoration-none">Trang chủ</a></li>
+                        <li><a href="/user/orders" class="text-white-50 text-decoration-none">Tra cứu đơn hàng</a></li>
+                        <li><a href="/admin" class="text-white-50 text-decoration-none">Trang Quản trị Admin</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h6 class="text-uppercase fw-bold text-success">Liên hệ</h6>
+                    <p class="small text-white-50 mb-1">📍 Địa chỉ: Cần Thơ / TP. Hồ Chí Minh, Việt Nam</p>
+                    <p class="small text-white-50 mb-1">✉️ Email: contact@anpaper.vn</p>
+                    <p class="small text-white-50">📞 Hotline: 0900 123 456</p>
+                </div>
+            </div>
+            <hr class="bg-secondary">
+            <div class="text-center small text-white-50">
+                © 2026 A.N PAPER. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
